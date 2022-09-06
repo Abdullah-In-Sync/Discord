@@ -8,14 +8,16 @@ function Sidebar() {
     <div className="sidebar">
       <div className="sidebar__top">
         <h1>Discord</h1>
-      <ExpandMoreIcon />
+        <ExpandMoreIcon />
       </div>
 
       <div className="sidebar__channels">
         <div className="sidebar__channelsHeader">
-      <ExpandMoreIcon />
-      <h4>Text Channels</h4>
-      <AddIcon/>
+          <div className="sidebar__header">
+            <ExpandMoreIcon />
+            <h4>Text Channels</h4>
+          </div>
+          <AddIcon className="sidebar__addChannel" />
         </div>
       </div>
     </div>
