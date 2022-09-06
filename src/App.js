@@ -7,9 +7,6 @@ import Sidebar from './Sidebar';
 function App() {
   return (
     <div className="app">
-      <h2> We are building descord</h2>
-
-
       {/* Sidebar */}
       <Sidebar/>
 
