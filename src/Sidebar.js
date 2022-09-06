@@ -1,6 +1,7 @@
 import React from 'react'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import "./features/Sidebar.css"
+
 function Sidebar() {
   return (
     <div className="sidebar">
