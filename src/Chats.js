@@ -1,9 +1,13 @@
 import React from 'react'
+import { ChatsHeader } from './ChatsHeader'
+import "./features/Chat.css"
 
 function Chats() {
   return (
-    // <div>I am Chats</div>
-    <></>
+    <div className="chats">
+      <ChatsHeader />
+    </div>
+    
   )
 }
 

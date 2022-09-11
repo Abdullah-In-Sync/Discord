@@ -41,7 +41,8 @@
     align-items: center;
 }
 
-.sidebar__voice, .sidebar__profile {
+.sidebar__voice,
+.sidebar__profile {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,22 +58,30 @@
 }
 
 .sidebar_voiceIcon {
-    color: 4fb185;
+    color: #4fb185;
 }
 
 .sidebar_voiceIcon > h3 {
-    color: 4fb185;
+    color: #4fb185;
 }
 
 .sidebar_voiceIcon > p {
     font-size: smaller;
 }
 
-.sidebar__voiceIcon > .MuiSvgIcon {
+.sidebar__voiceIcons > .MuiSvgIcon {
 padding: 10px;
 }
 
-.sidebar__profileIcons{
+.sidebar__profileInfo {
     flex: 1;
     padding: 10px;
+}
+
+.sidebar_profileInfo > p {
+    font-size: smaller;
+}
+
+.sidebar__profileIcons > .MuiSvgIcon-root {
+padding: 10px;
 }

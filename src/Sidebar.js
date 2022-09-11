@@ -50,9 +50,9 @@ function Sidebar() {
       </div>
       <div className="sidebar__profile">
         <Avatar />
-        <div>
-          <h3>Mars</h3>
-          <p>#abdullahraghib</p>
+        <div className="sidebar__profileInfo">
+          <h3>@abdullah.mars</h3>
+          <p>#ThisIsMyId</p>
         </div>
         <div className="sidebar__profileIcons">
           <MicIcon/>
