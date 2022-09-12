@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.chats__messages {
+  flex: 1;
+}
+
 .chats__input {
   color: lightgray;
   display: flex;
@@ -18,12 +22,25 @@
   background-color: #474b53;
 }
 
-.chat__input > form >input {
+.chats__input > form > input {
   padding: 15px;
   background: transparent;
   border: none;
+  width: 100%;
   outline-width: 0;
   color: white;
   font-size: large;
+}
+
+.chats__input > form {
+  flex: 1;
+}
+
+.chats__inputButton {
+  display: none;
+}
+
+.chats__inputIcons > .MuiSvgIcon-root {
+  padding: 5px;
 }
 
