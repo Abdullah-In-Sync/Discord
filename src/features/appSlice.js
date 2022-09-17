@@ -12,12 +12,9 @@ export const appSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    login: (state, action) => {
+    setChannelId: (state, action) => {
       state.app += action.payload;
-    },
-    logout: (state) => {
-      state.app = null;
-    },
+    }
   },
 });
 
