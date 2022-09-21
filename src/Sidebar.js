@@ -10,8 +10,13 @@ import CallIcon from "@mui/icons-material/Call";
 import "./features/Sidebar.css";
 import { SidebarChannel } from "./SidebarChannel";
 import { Avatar } from "@mui/material/";
+import { selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux"
+import { auth } from "./firebase";
 
 function Sidebar() {
+  const user = useSelector(selectUser);
+  console.log(user.photo);
   return (
     <div className="sidebar">
       <div className="sidebar__top">
@@ -49,10 +54,10 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__profile">
-        <Avatar />
+        <Avatar onClick={()=>auth.signOut()} src={user.photo} />
         <div className="sidebar__profileInfo">
-          <h3>@abdullah.mars</h3>
-          <p>#ThisIsMyId</p>
+          <h3>{user.displayName}</h3>
+          <p>#{user.uid.substring(0,5)}</p>
         </div>
         <div className="sidebar__profileIcons">
           <MicIcon/>

@@ -7,7 +7,7 @@ import { selectUser } from "./features/userSlice"
 import { useSelector, useDispatch } from 'react-redux';
 import { Login } from './Login';
 import { auth } from "./firebase"
-import { login } from "./features/userSlice";
+import { login, logout } from "./features/userSlice";
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -24,7 +24,9 @@ function App() {
             })
           );
       } else {
-
+        dispatch(
+          logout()
+        )
       }
     });
   }, [dispatch]);

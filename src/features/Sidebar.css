@@ -84,4 +84,5 @@ padding: 10px;
 
 .sidebar__profileIcons > .MuiSvgIcon-root {
 padding: 10px;
+cursor: pointer;
 }
