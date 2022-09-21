@@ -13,6 +13,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(()=> {
     auth.onAuthStateChanged((authUser)=> {
+      console.log("user is", authUser);
       if (authUser) {
           dispatch(
             login({
@@ -21,12 +22,12 @@ function App() {
               email: authUser.email,
               displayName: authUser.displayName
             })
-          )
+          );
       } else {
 
       }
     });
-  })
+  }, [dispatch]);
   return (
     <div className="app">
       {user?(
