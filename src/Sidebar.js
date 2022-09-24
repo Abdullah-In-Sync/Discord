@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import AddIcon from "@mui/icons-material/Add";
-import MicIcon from '@mui/icons-material/Mic';
-import HeadsetIcon from '@mui/icons-material/Headset';
-import SettingsIcon from '@mui/icons-material/Settings';
+import MicIcon from "@mui/icons-material/Mic";
+import HeadsetIcon from "@mui/icons-material/Headset";
+import SettingsIcon from "@mui/icons-material/Settings";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CallIcon from "@mui/icons-material/Call";
 import "./features/Sidebar.css";
 import { SidebarChannel } from "./SidebarChannel";
 import { Avatar } from "@mui/material/";
 import { selectUser } from "./features/userSlice";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import { auth } from "./firebase";
+import db from "./firebase";
+import { onSnapshot, collection, addDoc } from "firebase/firestore";
 
 function Sidebar() {
   const user = useSelector(selectUser);
-  console.log(user.photo);
+  const collRef = collection(db, "channels");
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    onSnapshot(collRef, (docs) => {
+      const channelsItems = [];
+      docs.forEach((doc) => {
+        channelsItems.push({ id: doc.id, channel: doc.channel });
+        setChannels(channelsItems);
+        console.log(channelsItems);
+      });
+    });
+  }, []);
+
+  const addChannelHandler = async () => {
+    const channelName = prompt("Enter Channel Name");
+    console.log(channelName)
+      addDoc(collRef, {
+        channel: channelName,
+      });
+  };
   return (
     <div className="sidebar">
       <div className="sidebar__top">
@@ -30,13 +52,15 @@ function Sidebar() {
             <ExpandMoreIcon />
             <h4>Text Channels</h4>
           </div>
-          <AddIcon className="sidebar__addChannel" />
+          <AddIcon
+            onClick={addChannelHandler}
+            className="sidebar__addChannel"
+          />
         </div>
         <div className="sidebar__channelsList">
-          <SidebarChannel />
-          <SidebarChannel />
-          <SidebarChannel />
-          <SidebarChannel />
+          {channels.map((channel) => (
+            <SidebarChannel />
+          ))}
         </div>
       </div>
       <div className="sidebar__voice">
@@ -54,15 +78,15 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__profile">
-        <Avatar onClick={()=>auth.signOut()} src={user.photo} />
+        <Avatar onClick={() => auth.signOut()} src={user.photo} />
         <div className="sidebar__profileInfo">
           <h3>{user.displayName}</h3>
-          <p>#{user.uid.substring(0,5)}</p>
+          <p>#{user.uid.substring(0, 5)}</p>
         </div>
         <div className="sidebar__profileIcons">
-          <MicIcon/>
-          <HeadsetIcon/>
-          <SettingsIcon/>
+          <MicIcon />
+          <HeadsetIcon />
+          <SettingsIcon />
         </div>
       </div>
     </div>

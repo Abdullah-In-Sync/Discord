@@ -24,9 +24,7 @@ function App() {
             })
           );
       } else {
-        dispatch(
-          logout()
-        )
+        dispatch(logout())
       }
     });
   }, [dispatch]);
