@@ -14,7 +14,7 @@ import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import { auth } from "./firebase";
 import db from "./firebase";
-import { onSnapshot, collection, addDoc } from "firebase/firestore";
+import { onSnapshot, collection, addDoc, getDocs } from "firebase/firestore";
 
 function Sidebar() {
   const user = useSelector(selectUser);
@@ -22,12 +22,17 @@ function Sidebar() {
   const [channels, setChannels] = useState([]);
 
   useEffect(() => {
+    const getUser = async() =>{
+      const data = await getDocs(collRef, "channels")
+      console.log("data", data);
+    }
+    getUser();
     onSnapshot(collRef, (docs) => {
       const channelsItems = [];
       docs.forEach((doc) => {
         channelsItems.push({ id: doc.id, channel: doc.channel });
         setChannels(channelsItems);
-        console.log(channelsItems);
+        // console.log(channelsItems);
       });
     });
   }, []);
