@@ -6,14 +6,13 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import "./features/ChatsHeader.css"
-
-export const ChatsHeader = () => {
+export const ChatsHeader = ({channelName}) => {
   return (
     <div className="chatsHeader">
       <div className="chatsHeader__left">
             <h3>
             <span className="chatsHeader__hash">#</span>
-            Test Channel Name
+            {channelName}
             </h3>
       </div>
       <div className="chatsHeader__right">

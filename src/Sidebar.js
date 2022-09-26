@@ -30,7 +30,8 @@ function Sidebar() {
     onSnapshot(collRef, (docs) => {
       const channelsItems = [];
       docs.forEach((doc) => {
-        channelsItems.push({ id: doc.id, channel: doc.channel });
+        console.log("doc", doc.data());
+        channelsItems.push({ id: doc.id, channel: doc.data()});
         setChannels(channelsItems);
         // console.log(channelsItems);
       });
@@ -63,8 +64,8 @@ function Sidebar() {
           />
         </div>
         <div className="sidebar__channelsList">
-          {channels.map((channel) => (
-            <SidebarChannel />
+          {channels.map(({id, channel}) => (
+            <SidebarChannel id={id} key={id} channel={channel.channel}/>
           ))}
         </div>
       </div>
