@@ -9,7 +9,14 @@ import { Messages } from "./Messages";
 import { useSelector } from "react-redux";
 import { selectChannelId, selectChannelName } from "./features/appSlice";
 import { selectUser } from "./features/userSlice";
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "@firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "@firebase/firestore";
 import db from "./firebase";
 
 function Chats() {
@@ -18,20 +25,21 @@ function Chats() {
   const channelName = useSelector(selectChannelName);
   const [input, setInput] = useState("");
   const [messeges, setMessages] = useState([]);
-console.log("channelId", channelId);
-  const q = query(collection(db, "channels"), orderBy("timeStamp"));
+  console.log("channelId", channelId);
+  let collRef = collection(db, "channels");
+  const q = query(collRef, orderBy("timeStamp","desc"));
   useEffect(() => {
     if (channelId) {
       onSnapshot(q, (docs) => {
-        // setMessages(docs.data());
-        console.log("data");
+        setMessages(docs.data());
+        console.log("data", messeges);
       });
     }
   }, []);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    addDoc(q, {
+    addDoc(collRef, {
       timestamp: serverTimestamp(),
       message: input,
       user: user,
@@ -43,7 +51,11 @@ console.log("channelId", channelId);
       <ChatsHeader channelName={channelName} />
       <div className="chats__messages">
         {messeges.map((message) => (
-          <Messages />
+          <Messages
+            timestamp={message.timestamp}
+            message={message.message}
+            user={message.user}
+          />
         ))}
       </div>
       <div className="chats__input">
@@ -51,7 +63,8 @@ console.log("channelId", channelId);
         <form action="">
           <input
             type="text"
-            value={(e) => setInput(e.target.value)}
+            disabled={!channelId}
+            onChange={(e) => setInput(e.target.value)}
             placeholder={`Message # ${channelName}`}
           />
           <button
@@ -59,7 +72,6 @@ console.log("channelId", channelId);
             className="chats__inputButton"
             type="submit"
           >
-            {" "}
             Send Message
           </button>
         </form>
