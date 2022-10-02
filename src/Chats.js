@@ -15,42 +15,53 @@ import {
   onSnapshot,
   orderBy,
   query,
+  getDocs,
+  doc,
   serverTimestamp,
 } from "@firebase/firestore";
 import db from "./firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore"
 
 function Chats() {
   const user = useSelector(selectUser);
   const channelId = useSelector(selectChannelId);
   const channelName = useSelector(selectChannelName);
   const [input, setInput] = useState("");
-  const [messeges, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
   console.log("channelId", channelId);
-  let collRef = collection(db, "channels");
-  const q = query(collRef, orderBy("timeStamp","desc"));
+  // let collRef = collection(db, "channels");
+  let subRef = collection(db, `channels/${channelId}/messages`);
+  const [docs] = useCollectionData(subRef);
+  // const q = query(collRef, orderBy("timeStamp","desc"));
   useEffect(() => {
     if (channelId) {
-      onSnapshot(q, (docs) => {
-        setMessages(docs.data());
-        console.log("data", messeges);
+      onSnapshot(subRef, (docs) => {
+        const channelsMessages = [];
+        docs.forEach((doc) => {
+          channelsMessages.push(doc.data());
+          setMessages(channelsMessages);
+          console.log(channelsMessages);
+        });
       });
     }
-  }, []);
-
-  const sendMessage = (e) => {
-    e.preventDefault();
-    addDoc(collRef, {
-      timestamp: serverTimestamp(),
+    console.log(messages);
+    }, []);
+    
+    const sendMessage = async (e) => {
+      console.log("messages sub", messages);
+      e.preventDefault();
+    await addDoc(subRef, {
       message: input,
+      timestamp: serverTimestamp(),
       user: user,
-    });
-    setInput("");
+    })
+    setMessages("");
   };
   return (
     <div className="chats">
       <ChatsHeader channelName={channelName} />
       <div className="chats__messages">
-        {messeges.map((message) => (
+        {messages.map((message) => (
           <Messages
             timestamp={message.timestamp}
             message={message.message}

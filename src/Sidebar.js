@@ -24,13 +24,13 @@ function Sidebar() {
   useEffect(() => {
     const getUser = async() =>{
       const data = await getDocs(collRef, "channels")
-      console.log("data", data);
+      // console.log("data", data);
     }
     getUser();
     onSnapshot(collRef, (docs) => {
       const channelsItems = [];
       docs.forEach((doc) => {
-        console.log("doc", doc.data());
+        // console.log("doc", doc.data());
         channelsItems.push({ id: doc.id, channel: doc.data()});
         setChannels(channelsItems);
         // console.log(channelsItems);
