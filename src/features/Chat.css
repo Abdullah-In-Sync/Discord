@@ -8,6 +8,14 @@
 
 .chats__messages {
   flex: 1;
+  overflow: scroll;
+}
+.chats__messages::-webkit-scrollbar{
+  display: none;
+}
+.chats__messages{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .chats__input {
@@ -43,4 +51,3 @@
 .chats__inputIcons > .MuiSvgIcon-root {
   padding: 5px;
 }
-

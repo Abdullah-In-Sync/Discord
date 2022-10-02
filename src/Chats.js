@@ -45,7 +45,7 @@ function Chats() {
       });
     }
     console.log(messages);
-    }, []);
+    }, [channelId]);
     
     const sendMessage = async (e) => {
       console.log("messages sub", messages);
@@ -55,7 +55,8 @@ function Chats() {
       timestamp: serverTimestamp(),
       user: user,
     })
-    setMessages("");
+    setMessages([]);
+    setInput("");
   };
   return (
     <div className="chats">
@@ -63,6 +64,7 @@ function Chats() {
       <div className="chats__messages">
         {messages.map((message) => (
           <Messages
+            key={message.id}
             timestamp={message.timestamp}
             message={message.message}
             user={message.user}
@@ -73,6 +75,7 @@ function Chats() {
         <AddCircleIcon fontSize="large" />
         <form action="">
           <input
+            class="message_input"
             type="text"
             disabled={!channelId}
             onChange={(e) => setInput(e.target.value)}
