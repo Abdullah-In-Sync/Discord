@@ -55,7 +55,7 @@ function Chats() {
       timestamp: serverTimestamp(),
       user: user,
     })
-    setMessages([]);
+    // setMessages([]);
     setInput("");
   };
   return (
@@ -76,6 +76,7 @@ function Chats() {
         <form action="">
           <input
             class="message_input"
+            value ={input}
             type="text"
             disabled={!channelId}
             onChange={(e) => setInput(e.target.value)}
