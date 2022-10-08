@@ -15,12 +15,9 @@ import {
   onSnapshot,
   orderBy,
   query,
-  getDocs,
-  doc,
   serverTimestamp,
 } from "@firebase/firestore";
 import db from "./firebase";
-import { useCollectionData } from "react-firebase-hooks/firestore"
 
 function Chats() {
   const user = useSelector(selectUser);
@@ -29,9 +26,7 @@ function Chats() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   console.log("channelId", channelId);
-  // let collRef = collection(db, "channels");
   let subRef = collection(db, `channels/${channelId}/messages`);
-  const [docs] = useCollectionData(subRef);
   const q = query(subRef, orderBy("timestamp", "desc"));
   useEffect(() => {
     if (channelId) {
@@ -64,7 +59,7 @@ function Chats() {
       <div className="chats__messages">
         {messages.map((message, i) => (
           <Messages
-            key={message.id + i}
+            key={message.timestamp + i}
             timestamp={message.timestamp}
             message={message.message}
             user={message.user}
@@ -75,7 +70,7 @@ function Chats() {
         <AddCircleIcon fontSize="large" />
         <form action="">
           <input
-            class="message_input"
+            className="message_input"
             value ={input}
             type="text"
             disabled={!channelId}

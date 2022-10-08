@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectChannelId, setChannelInfo } from "./features/appSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,18 +6,19 @@ import "./features/SidebarChannel.css";
 import { deleteDoc, doc } from "@firebase/firestore";
 import db from "./firebase";
 
-export const SidebarChannel = ({ channel, id }) => {
+export const SidebarChannel = ({ channel, id, event }) => {
   const dispatch = useDispatch();
   const channelId = useSelector(selectChannelId);
-  useEffect(() => {
- deleteChannel();
-  }, [])
   const deleteChannel = async () => {
     if(channelId) {
       let docRef = doc(db, "channels", channelId);
       await deleteDoc(docRef);
     }
+    event();
   };
+  useEffect(() => {
+ deleteChannel();
+  }, [channelId])
   
   return (
     <div
