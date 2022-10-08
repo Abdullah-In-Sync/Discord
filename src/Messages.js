@@ -9,7 +9,7 @@ export const Messages = ({timestamp, message, user}) => {
         <div className="message__info">
             <h4>
                 @{user.displayName}
-                <span className="message__timestamp">{new Date(timestamp && timestamp.toDate()).toUTCString()}</span>
+                <span className="message__timestamp">{new Date(timestamp && timestamp.toDate()).toLocaleTimeString("en-US", {timeZone: "Asia/Kolkata"})}</span>
             </h4>
             <p>{message}</p>
         </div>

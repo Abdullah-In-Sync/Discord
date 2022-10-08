@@ -32,10 +32,10 @@ function Chats() {
   // let collRef = collection(db, "channels");
   let subRef = collection(db, `channels/${channelId}/messages`);
   const [docs] = useCollectionData(subRef);
-  // const q = query(collRef, orderBy("timeStamp","desc"));
+  const q = query(subRef, orderBy("timestamp", "desc"));
   useEffect(() => {
     if (channelId) {
-      onSnapshot(subRef, (docs) => {
+      onSnapshot(q, (docs) => {
         const channelsMessages = [];
         docs.forEach((doc) => {
           channelsMessages.push(doc.data());
@@ -62,9 +62,9 @@ function Chats() {
     <div className="chats">
       <ChatsHeader channelName={channelName} />
       <div className="chats__messages">
-        {messages.map((message) => (
+        {messages.map((message, i) => (
           <Messages
-            key={message.id}
+            key={message.id + i}
             timestamp={message.timestamp}
             message={message.message}
             user={message.user}

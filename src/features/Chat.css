@@ -16,6 +16,7 @@
 .chats__messages{
   -ms-overflow-style: none;
   scrollbar-width: none;
+  flex-direction: column-reverse;
 }
 
 .chats__input {
