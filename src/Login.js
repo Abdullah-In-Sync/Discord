@@ -1,8 +1,7 @@
 import React from "react";
 import "./features/Login.css";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "./firebase";
-import { login, logout } from "./features/userSlice";
 
 export const Login = () => {
   const signIn = () => {

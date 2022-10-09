@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import './App.css';
 import Chats from './Chats';
 import Sidebar from './Sidebar';
@@ -13,7 +12,6 @@ function App() {
   const dispatch = useDispatch();
   useEffect(()=> {
     auth.onAuthStateChanged((authUser)=> {
-      console.log("user is", authUser);
       if (authUser) {
           dispatch(
             login({

@@ -25,9 +25,11 @@ function Chats() {
   const channelName = useSelector(selectChannelName);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  console.log("channelId", channelId);
-  let subRef = collection(db, `channels/${channelId}/messages`);
+  let path = "channels";
+  if (channelId) path =  `channels/${channelId}/messages`;
+  let subRef = collection(db, path);
   const q = query(subRef, orderBy("timestamp", "desc"));
+  
   useEffect(() => {
     if (channelId) {
       onSnapshot(q, (docs) => {
@@ -35,15 +37,13 @@ function Chats() {
         docs.forEach((doc) => {
           channelsMessages.push(doc.data());
           setMessages(channelsMessages);
-          console.log(channelsMessages);
         });
       });
     }
-    console.log(messages);
+    setMessages([]);
     }, [channelId]);
     
     const sendMessage = async (e) => {
-      console.log("messages sub", messages);
       e.preventDefault();
     await addDoc(subRef, {
       message: input,
@@ -53,9 +53,10 @@ function Chats() {
     // setMessages([]);
     setInput("");
   };
+
   return (
     <div className="chats">
-      <ChatsHeader channelName={channelName} />
+      <ChatsHeader channelName={channelName || ""} />
       <div className="chats__messages">
         {messages.map((message, i) => (
           <Messages

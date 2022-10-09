@@ -14,7 +14,7 @@ import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import { auth } from "./firebase";
 import db from "./firebase";
-import { onSnapshot, collection, addDoc, getDocs } from "firebase/firestore";
+import { onSnapshot, collection, addDoc } from "firebase/firestore";
 import { selectChannelId } from "./features/appSlice";
 
 function Sidebar() {
@@ -27,10 +27,8 @@ function Sidebar() {
     onSnapshot(collRef, (docs) => {
       const channelsItems = [];
       docs.forEach((doc) => {
-        // console.log("doc", doc.data());
         channelsItems.push({ id: doc.id, channel: doc.data()});
         setChannels(channelsItems);
-        // console.log(channelsItems);
       });
     });
   }, [channelId, collRef]);
@@ -38,17 +36,14 @@ function Sidebar() {
     onSnapshot(collRef, (docs) => {
       const channelsItems = [];
       docs.forEach((doc) => {
-        // console.log("doc", doc.data());
         channelsItems.push({ id: doc.id, channel: doc.data()});
         setChannels(channelsItems);
-        // console.log(channelsItems);
       });
     });
   }
 
   const addChannelHandler = async () => {
     const channelName = prompt("Enter Channel Name");
-    console.log(channelName)
       addDoc(collRef, {
         channel: channelName,
       });
@@ -73,7 +68,7 @@ function Sidebar() {
         </div>
         <div className="sidebar__channelsList">
           {channels.map(({id, channel}) => (
-            <SidebarChannel id={id} key={id} channel={channel.channel} event={channelDeleted}/>
+            <SidebarChannel id={id} key={id} channel={channel.channel} channelSelectedForDelete={channelId} event={channelDeleted}/>
           ))}
         </div>
       </div>
