@@ -58,7 +58,7 @@ useEffect(() => {
 
   return (
     <div className="app">
-      {user ? (
+      {true ? (
         <>
           {
             windowDimensions <= 786 ? (
