@@ -55,7 +55,7 @@ function Chats() {
   };
 
   return (
-    <div className="chats">
+    <div className="chats" id="chats__el">
       <ChatsHeader channelName={channelName || ""} />
       <div className="chats__messages">
         {messages.map((message, i) => (
@@ -76,7 +76,7 @@ function Chats() {
             type="text"
             disabled={!channelId}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Message # ${channelName}`}
+            placeholder={`${channelName ? channelName : "Please Select A Channel"}`}
           />
           <button
             onClick={sendMessage}

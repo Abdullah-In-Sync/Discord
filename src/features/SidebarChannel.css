@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .sidebarChannel:hover {
@@ -32,4 +33,12 @@
 }
 .sidebarChannel__delete:hover{
     color: white;
+}
+
+.sidebarChannel__selected {
+    background-color: #40464b;
+}
+
+.sidebarChannel__selected > h4 {
+background-color: #40464b;
 }

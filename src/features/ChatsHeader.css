@@ -20,8 +20,6 @@
 
 .chatsHeader__right {
   display: flex;
-  align-items: center;
-  flex: 0.5;
   justify-content: space-between;
 }
 .chatsHeader__right > .MuiSvgIcon-root {
@@ -45,4 +43,75 @@
   outline-width: 0;
   color: white;
   border: none;
+}
+.chatsHeader__otherIcons {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+.chatsHeader__center {
+  height: 50px;
+  width: 50px;
+}
+@media screen and (max-width: 671px) {
+.chatsHeader__otherIcons {
+  display: none;
+}
+.chatsHeader__right {
+  align-items: right;
+  justify-content: flex-end;
+}
+.chatsHeader {
+  justify-content: flex-end;
+  padding: 18px 0;
+}
+.chatsHeader__center svg {
+  justify-self: flex-start;
+}
+#logo {
+  position: absolute;
+  left: 50px;
+  top: 10px;
+}
+
+.chatsHeader__right h3 span {
+  text-align: center;
+  margin-top: auto;
+  font-size: 20px;
+  padding-left: 0;
+}
+
+.message_input::placeholder {
+  font-size: 12px;
+  
+}
+}
+
+.line {
+  width: 25px;
+  height: 2px;
+  background: white;
+  margin: 5px auto;  
+}
+.hamburger {
+  position: absolute;
+  background-color: transparent;
+  left: 10px;
+  top: 20px;
+  z-index: 10;
+  box-shadow: none;
+}
+@media screen and (min-width: 671px) {
+  .chatsHeader__right {
+    flex: 0.45 1;
+}
+
+.chatsHeader__center {
+  display: none;
+}
+.hamburger {
+  display: none;
+}
 }
