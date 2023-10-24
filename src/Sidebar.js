@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import AddIcon from "@mui/icons-material/Add";
 import MicIcon from "@mui/icons-material/Mic";
@@ -51,7 +50,7 @@ function Sidebar() {
   return (
     <div className="sidebar" id="sidebar__el">
       <div className="sidebar__top">
-        <h1>Discord</h1>
+        <h1>Descord</h1>
       </div>
 
       <div className="sidebar__channels">
