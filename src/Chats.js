@@ -41,7 +41,7 @@ function Chats() {
       });
     }
     setMessages([]);
-    }, [channelId]);
+    }, [channelId, q]);
     
     const sendMessage = async (e) => {
       e.preventDefault();
