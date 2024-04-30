@@ -11,7 +11,7 @@ import { selectChannelId } from './features/appSlice';
 function App() {
   const user = useSelector(selectUser);
   const channelId = useSelector(selectChannelId);
-
+  // is sideBar open or nots
   const [isSidebar, setIsSidebar] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
